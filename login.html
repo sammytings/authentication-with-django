@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>St Pauls School</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    body {
+      background: #F5F5F5;
+      font-family: Arial, sans-serif;
+    }
+
+    img {
+      display: block;
+      margin: 20px auto;
+      max-width: 150px;
+    }
+
+    h1 {
+      text-align: center;
+      text-transform: capitalize;
+    }
+
+    form {
+      margin: 20px auto;
+      background: #ffffff;
+      width: 330px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    .input-box {
+      position: relative;
+      margin-top: 15px;
+    }
+
+    .input-box i {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      color: #111;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 10px 10px 10px 35px;
+      box-sizing: border-box;
+      
+    }
+
+    button {
+      background-color: #2E9E45;
+      color: #FFFFFF;
+      border: none;
+      width: 100%;
+      margin-top: 20px;
+      text-transform: uppercase;
+      border-radius: 6px;
+      padding: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #24823A;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(46, 158, 69, 0.35);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 8px rgba(46, 158, 69, 0.25);
+    }
+
+    p {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .error-msg {
+      color: red;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <img src="W.png" alt="School Logo">
+  <h1>St Pauls School</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    {% if messages %}
+      {% for message in messages %}
+        <p class="error-msg">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+
+    <div class="input-box">
+      <i class="fa-solid fa-user"></i>
+      <input type="text" id="fname" name="username" placeholder="Username">
+    </div>
+
+    <div class="input-box">
+      <i class="fa-solid fa-id-card"></i>
+      <input type="text" id="freg" name="reg_no" placeholder="Reg No">
+    </div>
+
+    <div class="input-box">
+      <i class="fa-solid fa-shield-halved"></i>
+      <input type="password" id="fpassword" name="password" placeholder="Password">
+    </div>
+
+    <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> LOG IN </button>
+
+    <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+  </form>
+
+  <script>
+    function login(event) {
+      event.preventDefault();
+
+      let fullname = document.getElementById("fname").value.trim();
+      let reg = document.getElementById("freg").value.trim();
+      let password = document.getElementById("fpassword").value.trim();
+
+      if (!fullname || !reg || !password) {
+        alert("Please fill all fields");
+        return;
+      }
+
+      // Optional: JS client-side check can stay
+      // Django server will handle real authentication
+    }
+  </script>
+
+</body>
+</html>
